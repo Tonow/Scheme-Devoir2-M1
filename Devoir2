@@ -21,7 +21,7 @@
   )
 
 ;;;;;;;;;;;;;;;;;;
-;; 2 PREIERE SERIE
+;; 2 PREIMERE SERIE
 ;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;
@@ -115,3 +115,22 @@
 ;; (head (tail (tail (tail (tail (tail (two-elements 'a 'b 1 1 )))))))
 
 ;; XXX NE FONCTIONE PAS !!!
+
+
+;;;;;;;;;;;;
+;; 2.2 D’autres opérations sur les streams
+;;;;;;;;;;;;
+
+;;2.2.1 Soient n un entier naturel et s un stream, donner la fonction truncate-stream, telle que l’évaluation
+;; de l’expression (truncate-stream s n) retourne un stream fini composé des n premiers
+;; éléments de s. Si s est fini et possède m éléments avec m < n, le résultat est un stream fini composé uniquement des m éléments de s.
+
+(define (truncate-stream s n )
+  (cond  ((zero? n) '())
+         ((end-of-stream? s)
+         (display "** End of this stream! **"))
+        (else (write (head s))
+         (truncate-stream (tail s) (- n 1))))
+  )
+
+;; XXX affiche a la fin une liste vide
