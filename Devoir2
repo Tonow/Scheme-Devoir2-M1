@@ -57,3 +57,19 @@
 
 (define swich
   (cons #t(delay (cons #f (delay swich)))))
+
+
+;;2.1.4 Étant donné un entier naturel n, donner la fonction stay-at-false, telle que l’évaluation
+;;de l’expression (stay-at-false n) retourne un stream dont les éléments sont composés comme suit:
+;;
+;;#t #f | . {z .. n éléments #f } #t #f | . {z .. n éléments #f } ...
+
+;; Fonction qui permet de repeté dans un stream #f n-fois puis qui renvois dans la fonction stay-at-false une fois finis
+(define (number-of-false n)
+  (if (zero? n) (stay-at-false n) (cons #f (delay (number-of-false (- n 1)))))
+  )
+
+;; Fonction en elle meme qui fait apelle a number-of-false
+(define (stay-at-false n)
+  (cons #t (delay (number-of-false n) ))
+  )
