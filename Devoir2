@@ -73,3 +73,45 @@
 (define (stay-at-false n)
   (cons #t (delay (number-of-false n) ))
   )
+
+
+
+;;2.1.5 Soient a et b deux données quelconques, et soient n a et n b deux entiers naturels, définir
+;;la fonction two-elements, telle que l’évaluation de l’expression (two-elements a b n a n b ) retourne le stream suivant :
+;;
+;;a . . a } | . {z n a éléments b . . b } | . {z n b éléments a | . {z . . a } n a éléments b . . b } | . {z n b éléments ...
+
+;; XXX NE FONCTIONE PAS !!!
+
+
+;; stream composer de na valeur de a
+(define (number-of-A a b na nb)
+  (let ((naa na));;Sauvegarde de la valeur
+    (set! naa na) ;test pour que ca fonctionne
+    (set! na (- na 1));;Parce que a est deja afficher une fois
+    (if (zero? na) (number-of-B a b naa nb ) (cons a (delay (number-of-A a b (- na 1) nb))))
+  ))
+
+;; stream composer de na valeur de a
+(define (number-of-A-bis a b na nb)
+  (let ((naa na));;Sauvegarde de la valeur
+    (set! naa na) ;test pour que ca fonctionne
+    (if (zero? na) (number-of-B a b naa nb ) (cons a (delay (number-of-A a b (- na 1) nb))))
+  ))
+
+;; stream composer de nb valeur b
+(define (number-of-B a b na nb)
+  (let ((nbb nb));;Sauvegarde de la valeur
+    (set! nbb nb) ;test pour que ca fonctionne
+    (if (zero? nb)  (number-of-A-bis a b na nbb ) (cons b (delay (number-of-B a b na (- nb 1)))))
+  ))
+
+;; lancement du stream avec la premiere valeur de a 
+(define (two-elements a b na nb )
+  (cons a (delay (number-of-A a b na nb)))
+  )
+
+;; test:
+;; (head (tail (tail (tail (tail (tail (two-elements 'a 'b 1 1 )))))))
+
+;; XXX NE FONCTIONE PAS !!!
