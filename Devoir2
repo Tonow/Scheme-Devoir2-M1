@@ -4,3 +4,16 @@
 
 
 
+;; 1 INTRADA
+;;retourne #t si l’année year est bissextile, #f sinon
+;;est bissextile :
+;;                si elle est divisible par 4 et pas par 100
+;;                ou si elle est divisible par 400
+;; argument : year -> entier
+(define (leap? year)
+  (cond ((and (eq? 0 (modulo year 100)) (not (eq? 0 (modulo year 400)))) #f)
+        ((eq? 0 (modulo year 400)) #t)
+        ((eq? 0 (modulo year 4)) #t)
+        (else #f)
+        )
+  )
