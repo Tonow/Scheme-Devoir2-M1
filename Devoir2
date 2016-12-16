@@ -28,7 +28,7 @@
 ;; 2.1 Programmation de streams
 ;;;;;;;;;;;;
 
-;;Définir la variable beat-5 dont la valeur est le stream infini composé des éléments suivants
+;;2.1.1 Définir la variable beat-5 dont la valeur est le stream infini composé des éléments suivants
 ;;
 ;;#t #f #t #f #f #t #f #t #f #f #t #f ... (la périodicité de 5 en 5)
 ;;
@@ -36,7 +36,7 @@
 (cons #t (delay (cons #f (delay (cons #t (delay (cons #f (delay (cons #f (delay beat-5)))))))))))
 
 
-;; Comparaison des deux fonctions (make-constant-stream x)
+;;2.1.2 Comparaison des deux fonctions (make-constant-stream x)
 (define (make-constant-stream-v0 x)
   (cons x (delay (make-constant-stream-v0 x))))
 
@@ -47,3 +47,13 @@
 ;; Je dirais que:
 ;;               -la fonction v0 doit prendre moins de place memoire.
 ;;               -la fonction V1 doit etre plus rapide puisqu'on a pas besoin de rapeller la fonction a chaque iteration.
+
+
+
+;;2.1.3 Définir la variable switch dont la valeur est le stream composé des éléments suivants :
+;;
+;;#t #f #t #f #t #f ...
+;;
+
+(define swich
+  (cons #t(delay (cons #f (delay swich)))))
