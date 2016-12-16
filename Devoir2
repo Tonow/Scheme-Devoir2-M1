@@ -36,3 +36,14 @@
 (cons #t (delay (cons #f (delay (cons #t (delay (cons #f (delay (cons #f (delay beat-5)))))))))))
 
 
+;; Comparaison des deux fonctions (make-constant-stream x)
+(define (make-constant-stream-v0 x)
+  (cons x (delay (make-constant-stream-v0 x))))
+
+(define (make-constant-stream-v1 x)
+  (letrec ((this (cons x (delay this))))
+    this))
+
+;; Je dirais que:
+;;               -la fonction v0 doit prendre moins de place memoire.
+;;               -la fonction V1 doit etre plus rapide puisqu'on a pas besoin de rapeller la fonction a chaque iteration.
