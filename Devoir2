@@ -3,8 +3,10 @@
 (require "for-hw-2.scm")
 
 
-
+;;;;;;;;;;;;
 ;; 1 INTRADA
+;;;;;;;;;;;;
+
 ;;retourne #t si l’année year est bissextile, #f sinon
 ;;est bissextile :
 ;;                si elle est divisible par 4 et pas par 100
@@ -17,3 +19,20 @@
         (else #f)
         )
   )
+
+;;;;;;;;;;;;;;;;;;
+;; 2 PREIERE SERIE
+;;;;;;;;;;;;;;;;;;
+
+;;;;;;;;;;;;
+;; 2.1 Programmation de streams
+;;;;;;;;;;;;
+
+;;Définir la variable beat-5 dont la valeur est le stream infini composé des éléments suivants
+;;
+;;#t #f #t #f #f #t #f #t #f #f #t #f ... (la périodicité de 5 en 5)
+;;
+(define beat-5
+(cons #t (delay (cons #f (delay (cons #t (delay (cons #f (delay (cons #f (delay beat-5)))))))))))
+
+
